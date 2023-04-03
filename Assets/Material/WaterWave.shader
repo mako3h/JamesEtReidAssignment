@@ -70,7 +70,7 @@ void vert(inout appdata v, out Input o) {
                 o.Normal = UnpackNormal(tex2D(_myBump, IN.uv_myBump)); //rgb to xyz
                 o.Normal = float3(_mySlider, _mySlider, 1);
 
-                o.Albedo = (water + foam) / 2.0 * _Tint;
+                o.Albedo = (water + foam) / 2.0 * _Tint * IN.vertColor.rgb;
 
                 float4 c = tex2D(_MainTex, IN.uv_MainTex);
                 //o.Albedo = c * IN.vertColor.rgb;
