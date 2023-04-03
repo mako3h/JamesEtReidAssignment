@@ -43,11 +43,11 @@ This shader consists of 2 passes, one to seperate the shadow casting (Pass 2), a
 <br>
 This shadow effect was added to every wall in the scene, as well as the player object and the goal object. <br>
 <br>
-**Last Visual Effect Here <br>
+**Last Visual Effect Here** <br>
 <br>
-**Glass: <br>
+**Glass:**<br>
 <br>
-**Bloom: <br>
+**Bloom:** <br>
 <br>
-**Depth of Field: <br>
+**Depth of Field:** <br>
 <br>
