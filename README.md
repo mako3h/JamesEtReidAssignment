@@ -17,6 +17,16 @@ In terms of the applications of our own implemented colour grades, we designed o
 Toon Shading: <br>
 Toon shading, or cel shading, is a type of rendering design to make 3D graphics appear flat, this is done by using less shading colour, instead of a gradient. Instead of a gradual linear transition, toon shading switches colours at the extremes. Requires an image of bands, with separate shading levels, the toon ramp. In our cel shading shader, we use the ToonRamp lighting model, to help apply the toon effect. We then have our LightingToonRamp function to calculate the toonshading itself. We perform calculations such as dotting the normal and light direction to acquire our diff value. We then add our Ramp Texture with our diff value to set our ramp value. Lastly we multiply our albedo by the colour of our light by our ramp value. We then return c, our toon shading value. Lastly in our surf function, we add a colour property to our albedo. <br>
 <br>
+We utilized toon shading to add more of a contrast between the environment and the goal object. This way, the goal has a unique touch to it, separating it from the rest of the scene. <br>
+<br>
+Outlining: <br>
+Outlining is essentially the process of adding a solid colour "outline" around the object. This can be a way to define, highlight, or add detail to a gameobject. In our scene, outlining was utilized to create a highlight effect around the goal object, making it stand out more, and make it more vibrant. Additionally, and as mentioned prior, toon shading and rim lighting were applied with the outline, to enhance the highlight effect. <br>
+<br>
+The initial outlining shader made in-class was used as a base to build off of. The outlining shader utilizes two passes to seperate the calculations. The first pass is where the outline colour is calculated and then applied, whereas the second is where the rest of the lighting effects are applied. The shadow shader uses the same 2 pass process, calculating the lighting initially, then finalizing the shadows in the second pass. 
+<br>
+In the first pass, we utilize the lambert lighting model with a vertex shader. We also turn OFF the z-buffer. The pass is very simple, as the only calculation in the vertex shader is adding the normal multiplied by the outline amount (range) to our xyz vertex values. In the surf function, we simply set the emission to our outline colour's rgb value. In the second pass, we use the toonramp lighting model to use toon shading. We then turn ON the z-buffer. We then perform toon shading calculations (see above). Lastly in our surf function, we perform normal mapping techniques (see above // however we did not add any textures to this object). We lastly set our rim value for rim lighting by dotting the normalized view direction with the normal, saturating it, and then subtracting it from one. We then set our emission to equal our rim colour property multiplied by our rim value to the power of the rimpower property. <br>
+<br>
+Too enhance the outline effect, we set the renderqueue option in the unity inspector to transparent. This helps make the outline appear around the object better.
 Water: <br>
 For our scene, we utilized a water wave shader to help create a beach theme for our game. We did so by building upon the inital shader from the lectures, while also adding bump mapping and scrolling overlay/foam. This way, we can create more realistic water effects. <br>
 <br>
@@ -24,4 +34,20 @@ We create this water wave effect by creating a sine wave motion in our shader. T
 <br>
 To add the scrolling/foam effect, we simply add a newuv value in our surf function. In this, we add our foam texture with a scrollX and scrollY property (range), which control the direction of the scroll. To ensure that the foam updates, we set both scroll properties to be multiplied by the unity time variable. <br>
 <br>
+The water was implemented around the surroundings of the scene. The player can see the water in action by looking our through the windows along the perimeter of the maze. This, again, adds to the beach theme of the game. <br>
+<br>
+Shadow Lines: <br>
+This technique allows us to create a custom shadow effect, casting transparent lines with our shadows. This helps add more detail to our scene and making it more interesting.
+<br>
+This shader consists of 2 passes, one to seperate the shadow casting (Pass 2), and one for creating the shadow lines as well as handling other properties like textures. The shader utilizes a vertex and fragment shader in both passes. We then tell unity to ignore lightmaps, so that we can create our own shadows. In our appdata we have standard values such as position, normal, and uv coordinates. In our v2f, we have our uv coordinates, colour, position, and shadow coordinates. In our vertex shader we calculate our shadow. We do so by converting the normal to world space, then converting it to something the fragment shader can use. In our fragment shader, we use the SHADOW_ATTENUATION boolean value to whether an object will recieve the main object's shadows or not (if the lines appear on it or not). Our shadow colour is equal to our shadow texture, our shadow lines, multiplied by our linesZoom property, adjusting how far apart our lines are. We then assign our shadow, col, and shadow colour values into our finalColour value by lerping them together. We then return finalColour. In our second pass, we use shadowcaster, telling unity we are casting our own shadows. We then pass our shadowcaster values from our v2f to our vertex shade, and then through to our fragment shader.
+<br>
+This shadow effect was added to every wall in the scene, as well as the player object and the goal object. <br>
+<br>
+- Last Visual Effect Here - <br>
+<br>
+Glass: <br>
+<br>
+Bloom: <br>
+<br>
+Depth of Field: <br>
 <br>
