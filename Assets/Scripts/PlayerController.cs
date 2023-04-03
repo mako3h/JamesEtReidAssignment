@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
 
 
     private Vector3 moveDir = Vector3.zero;
-    private CharacterController chacaterController; //these three are needed for the moevement
+    public CharacterController chacaterController; //these three are needed for the moevement
     private float yRotation = 0.0f;
 
 
