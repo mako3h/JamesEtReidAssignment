@@ -46,12 +46,18 @@ This shadow effect was added to every wall in the scene, as well as the player o
 **Last Visual Effect Here** <br>
 <br>
 **Glass:**<br>
-Glass allows us to create a transparent/see-through surface, creating a window effect. This can be useful in allowing light to travel into a room or to allow the player to see out in certain areas. 
+Glass allows us to create a transparent/see-through surface, creating a window effect. This can be useful in allowing light to travel into a room or to allow the player to see out in certain areas. <br>
 <br>
 This shader consists of one pass, containing a vertex and fragment shader. Prior to our pass we use GrabPass{} to grab the framebuffer contents into a texture to use in subsequent passes. This helps allow us to create the window/see-through effect by grabbing the screen behind the object (wall) and then using it as a texture, again creating the window effect. Our appdata consists of position and uv coordinates. In v2f, we again have uv coordinates, aswell as new unique uv values to ensure only a small portion of the scene can be seen through the window. We use uvgrab and uvbump to perform this. Additionally, we also need the size of the texel. In our vertex function, we take the vertices from the window and tranform them from world space to clip space, using UnityObjectToClipPos. We then calculate the position of the window within the screen space and the uv coordinates that correspond to it. This is done by setting the x and y coordinates of the uvgrab to equal the x and y uv coordinates multiplied by the scale property then added with the w coordinate. This is then all mulitplied by 0.5. We next set the uvgrab z and w values to equal the z and w uv coordinates. The uv is then set to the main texture, while the uvbump is set to the bump texture. In our fragment function, we first apply bump mapping by unpacking normals (see above). We create an offset value, setting it equal to the bump multiplied by the scale, which is then multiplied by the grabtexture texel size. Our uvgrab x and y values are then set equal the offset time the uvgrab z value plus the uvgrab x and y values. We create our colour value and set it equal to our grabtexture with a projected uvgrab value. We set our tint equal to our main texture. We then multiply colour by tint, creating the see-through effect by multiplying an existing colour with one from the main texture. We then return colour. <br>
 <br>
 Glass was implmented around the perimeter of the maze allowing us to see out to the water surroundings. The windows use a stained glass texture, to add a more unique visual experience, filling the scene with more vibrant colour.
 **Bloom:** <br>
+Bloom is the process of blurring an image, combining it with the original image, and then brightening it. <br>
 <br>
+The bloom shader utilizes 5 passes, as there are a large number of calculations to apply the burring and then the brightening of the image. Prior to the passes, we turn off culling and the z-buffer. We also utilize vertexData and Interpolator structs paired with interpolator vertexProgram to transform vertex positions to clip space and pass through the texture coordinates. <br>
+<br>
+We then create a single pass vertex fragment shader. In the fragment shader, we sample the source texture, and it as the result. We then make it a colour of our choosing; for example, red -> half4(1, 0, 0, 0). <br>
+<br>
+We then create a bloom c# script to pair with our shader. This is where we perform many of the burring operations, including up and downsampling. In the script, we add a public field to attach our shader to the script, a range for the number of blur iterations, and an array to process the blurring. Next is the OnRenderImage function, a method that occurs after the camera renders. The first for loop is where we apply bilinear filtering.
 **Depth of Field:** <br>
 <br>
