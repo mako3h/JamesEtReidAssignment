@@ -1,6 +1,9 @@
 # JamesEtReidAssignment
-Youtube Link:
+Youtube Link: 
 <br>
+<br>
+**The Game Explanation:**<br>
+Within this game, the player plays throughout a sunny environment in a beach themed maze. There is a warm cozy feel, along with water surrounding the players as they can see it through the windows. It is a first person puzzle game where the player is looking to find a green cube within the maze. They must traverse throughout the maze in search for this cube which is the win condition for the player. <br>
 **Integrations:** <br>
 <br>
 **Normal Mapping/Texturing:** <br>
