@@ -71,6 +71,7 @@ The bloom shader utilizes 5 passes, as there are a large number of calculations 
 <br>
 We then create a single pass vertex fragment shader. In the fragment shader, we sample the source texture, and it as the result. We then make it a colour of our choosing; for example, red -> half4(1, 0, 0, 0). <br>
 <br>
-We then create a bloom c# script to pair with our shader. This is where we perform many of the burring operations, including up and downsampling. In the script, we add a public field to attach our shader to the script, a range for the number of blur iterations, and an array to process the blurring. Next is the OnRenderImage function, a method that occurs after the camera renders. The first for loop is where we apply bilinear filtering.
+We then create a bloom c# script to pair with our shader. This is where we perform many of the burring operations, including up and downsampling. In the script, we add a public field to attach our shader to the script, a range for the number of blur iterations, and an array to process the blurring. Next is the OnRenderImage function, a method that occurs after the camera renders. The first for loop is where we apply bilinear filtering. We divide the width and height of the image by 2 for every iteration. <br>
+<br>
 **Depth of Field:** <br>
 <br>
