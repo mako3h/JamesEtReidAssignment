@@ -8,14 +8,22 @@ Flare:
   m_PrefabAsset: {fileID: 0}
   m_Name: LensFlare
   m_FlareTexture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
-  m_TextureLayout: 0
+  m_TextureLayout: 2
   m_Elements:
   - m_ImageIndex: 0
-    m_Position: 1
-    m_Size: 0.5
-    m_Color: {r: 1, g: 0, b: 0, a: 0}
+    m_Position: 1.35
+    m_Size: 11.24
+    m_Color: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 0}
     m_UseLightColor: 1
     m_Rotate: 0
     m_Zoom: 1
-    m_Fade: 1
-  m_UseFog: 1
+    m_Fade: 0
+  - m_ImageIndex: 0
+    m_Position: 1.84
+    m_Size: 3.46
+    m_Color: {r: 1, g: 0.9764151, b: 0.9764151, a: 0}
+    m_UseLightColor: 1
+    m_Rotate: 0
+    m_Zoom: 0
+    m_Fade: 0
+  m_UseFog: 0
