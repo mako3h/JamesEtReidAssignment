@@ -8,15 +8,22 @@ Normal Maps contain info about the normal at that UV coordinate, normals are the
 <br>
 As for our implementations, we utilized normal mapping in many aspects of our game. For example, the beach theme is created through the use of sand and water textures. Pairing this with the other textures applied to other gameobjects, the scene becomes much more unique and visually appealing. <br>
 <br>
+**Part 3: Colour Grading** <br>
+<br>
 **Colour Grading:** <br>
 Alters and enhances the colour of an image by changing the colour of a pixel to another colour. Done through the use of LUTs/Lookup Tables. Our properties include a main texture, LUT texture and Contribution Range or, the intensity of the grade. We then ensure there is no culling or depth so that we can see the effects taking place, and we create a vertex and fragment shader. In our appdata, we have our position, aswell as uv coordinates. In our v2f function, we have the same; position and uv coordinates. Our vertex shader transforms our object from object space to clip space. In our fragment shader, our colour is saturated (0 < value < 1), we add precision to our sampling so we cannot go beyond the limits of the LUT and we calculate the offset to map the image to the LUT. <br>
 <br>
 In terms of the applications of our own implemented colour grades, we designed our LUTs to represent two settings to fit the beach theme of our game. The first, the cool LUT, is to represent a colder nighttime atmosphere. The second, the warm LUT, is to represent a bright and sunny daytime summer atmosphere. <br>
 <br>
+**Part 4: Visual Effects** <br>
+<br>
 **Toon Shading:** <br>
 Toon shading, or cel shading, is a type of rendering design to make 3D graphics appear flat, this is done by using less shading colour, instead of a gradient. Instead of a gradual linear transition, toon shading switches colours at the extremes. Requires an image of bands, with separate shading levels, the toon ramp. In our cel shading shader, we use the ToonRamp lighting model, to help apply the toon effect. We then have our LightingToonRamp function to calculate the toonshading itself. We perform calculations such as dotting the normal and light direction to acquire our diff value. We then add our Ramp Texture with our diff value to set our ramp value. Lastly we multiply our albedo by the colour of our light by our ramp value. We then return c, our toon shading value. Lastly in our surf function, we add a colour property to our albedo. <br>
 <br>
 We utilized toon shading to add more of a contrast between the environment and the goal object. This way, the goal has a unique touch to it, separating it from the rest of the scene. <br>
+<br>
+**Lens Flare:** <br>
+**Part 5: Additional Effects** <br>
 <br>
 **Outlining:** <br>
 Outlining is essentially the process of adding a solid colour "outline" around the object. This can be a way to define, highlight, or add detail to a gameobject. In our scene, outlining was utilized to create a highlight effect around the goal object, making it stand out more, and make it more vibrant. Additionally, and as mentioned prior, toon shading and rim lighting were applied with the outline, to enhance the highlight effect. <br>
@@ -43,14 +50,15 @@ This shader consists of 2 passes, one to seperate the shadow casting (Pass 2), a
 <br>
 This shadow effect was added to every wall in the scene, as well as the player object and the goal object. <br>
 <br>
-**Last Visual Effect Here** <br>
-<br>
 **Glass:**<br>
 Glass allows us to create a transparent/see-through surface, creating a window effect. This can be useful in allowing light to travel into a room or to allow the player to see out in certain areas. <br>
 <br>
 This shader consists of one pass, containing a vertex and fragment shader. Prior to our pass we use GrabPass{} to grab the framebuffer contents into a texture to use in subsequent passes. This helps allow us to create the window/see-through effect by grabbing the screen behind the object (wall) and then using it as a texture, again creating the window effect. Our appdata consists of position and uv coordinates. In v2f, we again have uv coordinates, aswell as new unique uv values to ensure only a small portion of the scene can be seen through the window. We use uvgrab and uvbump to perform this. Additionally, we also need the size of the texel. In our vertex function, we take the vertices from the window and tranform them from world space to clip space, using UnityObjectToClipPos. We then calculate the position of the window within the screen space and the uv coordinates that correspond to it. This is done by setting the x and y coordinates of the uvgrab to equal the x and y uv coordinates multiplied by the scale property then added with the w coordinate. This is then all mulitplied by 0.5. We next set the uvgrab z and w values to equal the z and w uv coordinates. The uv is then set to the main texture, while the uvbump is set to the bump texture. In our fragment function, we first apply bump mapping by unpacking normals (see above). We create an offset value, setting it equal to the bump multiplied by the scale, which is then multiplied by the grabtexture texel size. Our uvgrab x and y values are then set equal the offset time the uvgrab z value plus the uvgrab x and y values. We create our colour value and set it equal to our grabtexture with a projected uvgrab value. We set our tint equal to our main texture. We then multiply colour by tint, creating the see-through effect by multiplying an existing colour with one from the main texture. We then return colour. <br>
 <br>
-Glass was implmented around the perimeter of the maze allowing us to see out to the water surroundings. The windows use a stained glass texture, to add a more unique visual experience, filling the scene with more vibrant colour.
+Glass was implmented around the perimeter of the maze allowing us to see out to the water surroundings. The windows use a stained glass texture, to add a more unique visual experience, filling the scene with more vibrant colour. <br>
+<br>
+**Part 6: Additional Post Processing Effects** <br>
+<br>
 **Bloom:** <br>
 Bloom is the process of blurring an image, combining it with the original image, and then brightening it. <br>
 <br>
