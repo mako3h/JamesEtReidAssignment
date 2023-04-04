@@ -23,6 +23,11 @@ Toon shading, or cel shading, is a type of rendering design to make 3D graphics 
 We utilized toon shading to add more of a contrast between the environment and the goal object. This way, the goal has a unique touch to it, separating it from the rest of the scene. <br>
 <br>
 **Lens Flare:** <br>
+<br>
+Lens flare is a tool that allows us to enhance directional lighting. In other words, giving the player the indication that the lighting is very bright. In a real life camera, this occurs when light is scattered in response to a bright light source. This occurs through internal reflection stemming from material imperfections in the lens.
+<br>
+In unity, we can create a lensflare flare material and assign it to a light source, such as directional light. We can then apply a flare layer component onto our camera to create the lens flare effect into our scene. A lens flare was utilized in our scene to showcase that the light source (sun) was very bright, matching the sunny beach theme of the game. <br>
+<br>
 **Part 5: Additional Effects** <br>
 <br>
 **Outlining:** <br>
