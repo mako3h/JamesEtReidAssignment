@@ -6362,8 +6362,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dofShader: {fileID: 4800000, guid: cce1c270ec8df004391f712e982d8417, type: 3}
-  focusDistance: 18.3
-  focusRange: 2.05
+  focusDistance: 16.2
+  focusRange: 10
   bokehRadius: 1
 --- !u!124 &963194232
 Behaviour:

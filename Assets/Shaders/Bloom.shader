@@ -49,7 +49,7 @@ Shader "Custom/Bloom"
 	half3 Prefilter(half3 c) {
 		half brightness = max(c.r, max(c.g, c.b));
 		half contribution = max(0, brightness - _Threshold);
-		contribution /= max(brightness, 0.00001);
+		contribution *= max(brightness, 0.00001);
 		return c * contribution;
 	}
 	ENDCG
