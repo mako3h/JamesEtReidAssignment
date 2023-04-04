@@ -83,5 +83,10 @@ We next begin to add the functionality to adjust the threshold of our bloom. Thi
 <br>
 We then create a new pass for debugging, and again another constant for said pass. This pass is identical to our first pass. We then modify the last blit for when debugging is enabled. We next create intensity values for both our script and shader, and set the intensity the same as our threshold. Lastly, in the last two passes, we multiply the intensity with our samplebox result. <br>
 <br>
+We use bloom to intensify the colours in our scene, making the more vibrant. This helps enhance the sunny, warm feel we are going for. <br>
+<br>
 **Depth of Field:** <br>
 <br>
+Depth of field is the effect of setting a camera focus distance and focus point to narrow down how much of the scene is in the camera's focus. This can make near or far objects appear out of focus, or blurred out. Practically, we create an effect to adjust the aperture opening of a camera, creating the camera focus point. <br>
+<br>
+Firstly, we create a shader and c# script, similar to the bloom process. The shader starts off similar to the bloom shader, with one vertex and fragment shader pass, aswell as the structs before them. The script is also quite similar, creating a public shader field to add our depth of field shader, as well as the OnRenderImage function. Next we begin to create the circle of confusion effect, to measure how out of focus the projection of a point is. We first create a constant for the pass in our script, and then create a pass for it in our shader. We use this constant when blitting. The pass is similar to the inital pass, however we include depth in this pass. We do so by sampling the depth texture, then converting it to a linear depth, then laslty rendering it. We utilize depth as the circle of confusion relies on the distance from the camera. We next create focus distance and range variables in our shader and script, and set them as we did in our bloom shader (intensity/threshold). We the use these values to calculate the circle of confusion in our pass for it, subtracting the distance from the depth and then dividing by the range. 
